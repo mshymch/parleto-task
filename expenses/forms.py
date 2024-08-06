@@ -11,5 +11,5 @@ class ExpenseSearchForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['name'].required = False
 
-    start_date = forms.DateField(required=False)
-    end_date = forms.DateField(required=False)
+    start_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    end_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
