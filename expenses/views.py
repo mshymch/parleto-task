@@ -19,6 +19,8 @@ class ExpenseListView(ListView):
             end_date = form.cleaned_data.get('end_date')
             categories = form.cleaned_data.get('categories')
 
+            sort_by = form.cleaned_data.get('sort_by')
+
             if name:
                 queryset = queryset.filter(name__icontains=name)
 
@@ -31,11 +33,22 @@ class ExpenseListView(ListView):
             if categories:
                 queryset = queryset.filter(category__in=categories)
 
+            if sort_by:
+                if sort_by == 'date_asc':
+                    queryset = queryset.order_by('date')
+                elif sort_by == 'date_desc':
+                    queryset = queryset.order_by('-date')
+                elif sort_by == 'category_asc':
+                    queryset = queryset.order_by('category__name')
+                elif sort_by == 'category_desc':
+                    queryset = queryset.order_by('-category__name')
+
         return super().get_context_data(
             form=form,
             object_list=queryset,
             summary_per_category=summary_per_category(queryset),
             **kwargs)
+
 
 class CategoryListView(ListView):
     model = Category

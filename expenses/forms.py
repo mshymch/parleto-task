@@ -18,3 +18,12 @@ class ExpenseSearchForm(forms.ModelForm):
         required=False,
         widget=forms.CheckboxSelectMultiple
     )
+    sort_by = forms.ChoiceField(
+        choices=[
+            ('date_asc', 'Date Ascending'),
+            ('date_desc', 'Date Descending'),
+            ('category_asc', 'Category Ascending'),
+            ('category_desc', 'Category Descending'),
+        ],
+        required=False
+    )
