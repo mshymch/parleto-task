@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.views.generic.list import ListView
 
 from .forms import ExpenseSearchForm
@@ -56,3 +57,8 @@ class CategoryListView(ListView):
     model = Category
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        queryset = super().get_context_data(object_list=object_list, **kwargs)
+        queryset['object_list'] = queryset['object_list'].annotate(expense_count=Count('expense'))
+
+        return queryset
