@@ -29,7 +29,7 @@
 		<td>{{ obj.category|default:"-" }}</td>
 		<td>{{ obj.name|default:"-" }}</td>
 		<td>{{ obj.amount|floatformat:2 }}</td>
-		<td>{{obj.date}}</td>
+		<td>{{ obj.date }}</td>
 		<td>
 		  <a href="{% url 'expenses:expense-edit' obj.id %}">edit</a>
 		  <a href="{% url 'expenses:expense-delete' obj.id %}">delete</a>
